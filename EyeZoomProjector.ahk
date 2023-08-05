@@ -1,15 +1,25 @@
+; Settings
 global name := "Fullscreen Projector (Scene) - Eye Zoom"
+global px_min := -1920 ; projector min, position X
+global py_min := 0 ; position Y
+global pw_min := 96 ; window Widht
+global ph_min := 54 ; window Height
+global px_max := -1280 ; projector max, position X
+global py_max := 0 ; position Y
+global pw_max := 1280 ; window Widht
+global ph_max := 720 ; window Height
 
-#If WinActive("Minecraft") || WinActive("Fullscreen Projector (Scene) - Eye Zoom") ; must change projector name
+; Main
+#If WinActive("Minecraft") || WinActive(name)
 {
-    Shift & J::
+    J::
         WinGetPos, X, Y, Width, Height, %name%
-        If (Width = 192 and Height = 108) {
-            WinMove, %name%,, -1920, 0, 1920, 1080
+        If (Width = pw_min and Height = ph_min) {
+            WinMove, % name,, px_max, py_max, pw_max, ph_max
             WinSet, AlwaysOnTop, On, %name%
         }
         Else
-            WinMove, %name%,, 0, 0, 192, 108
+            WinMove, % name,, px_min, py_min, pw_min, ph_min
             WinSet, AlwaysOnTop, Off, %name%
     Return
 }
